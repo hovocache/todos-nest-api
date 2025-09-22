@@ -6,7 +6,7 @@ import { UpdateTodoListDto } from './dto/update-todo-list.dto';
 import type { AllDataRO } from 'src/shared/shared.types';
 import type { ToDo } from './todo-lists.types';
 
-@Controller('todo-lists')
+@Controller('todo-list')
 export class TodoListsController {
   constructor(private readonly todoListsService: TodoListsService) {}
 

@@ -1,5 +1,5 @@
 type Meta = {
-    offset: number;
+    page: number;
     limit: number;
     total: number;
 }
