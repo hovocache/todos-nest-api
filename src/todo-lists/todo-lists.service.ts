@@ -1,5 +1,5 @@
 import { Model } from 'mongoose';
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { CreateTodoListDto } from './dto/create-todo-list.dto';
 import { UpdateTodoListDto } from './dto/update-todo-list.dto';
@@ -35,15 +35,27 @@ export class TodoListsService {
      };
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} todoList`;
+  async findOne(id: number) {
+    const todo = await this.toDoModel.findById(id).exec();
+    if (!todo) {
+      throw new NotFoundException(`Todo with ID ${id} not found`);
+    }
+    return todo;
   }
 
-  update(id: number, updateTodoListDto: UpdateTodoListDto) {
-    return `This action updates a #${id} todoList`;
+  async update(id: number, updateTodoListDto: UpdateTodoListDto) {
+    const todo = await this.toDoModel.findByIdAndUpdate(id, updateTodoListDto, { new: true }).exec();
+    if (!todo) {
+      throw new NotFoundException(`Todo with ID ${id} not found`);
+    }
+    return todo;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} todoList`;
+  async remove(id: number) {
+    const todo = await this.toDoModel.findByIdAndDelete(id).exec();
+    if (!todo) {
+      throw new NotFoundException(`Todo with ID ${id} not found`);
+    }
+    return todo;
   }
 }
