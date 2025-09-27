@@ -3,15 +3,14 @@ import { AppModule } from './app.module';
 
 
 async function bootstrap() {
-  // const app = await NestFactory.create(AppModule);
     const app = await NestFactory.create(AppModule, {
     cors: {
-      // origin: [
-      //   'http://localhost:3000',   // фронт локально
-      //   'https://www.thunderclient.com', // боевой фронт
-      // ],
+      origin: [
+        'http://localhost:3000',
+        'https://www.thunderclient.com',
+      ],
       
-      credentials: true,           // если нужны cookies/headers
+      credentials: true, 
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     },
   });

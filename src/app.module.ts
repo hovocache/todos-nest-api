@@ -13,7 +13,8 @@ import { TodoListsModule } from './todo-lists/todo-lists.module';
         ConfigModule.forRoot({
       isGlobal: true,
     }),
-        MongooseModule.forRoot('mongodb://localhost:27017',{dbName: 'todosDB'}),
+        MongooseModule.forRoot(process.env.MONGO_DB_URI ||'mongodb://localhost:27017',
+          {dbName: process.env.MONGO_DB_NAME || 'todosDB'}),
         TodoListsModule,
   ],
   controllers: [AppController, TodoListsController],
