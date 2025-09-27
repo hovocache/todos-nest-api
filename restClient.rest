@@ -1,11 +1,12 @@
 # http://localhost:4100
 
-# http://localhost:4100/todo-list
 
-curl -X POST "http://localhost:4100/todo-list" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "title": "Купить молоко",
-    "description": "2 литра, ночью доставить"
-  }'
+curl -X GET "http://localhost:4100/todo-list"
+
+# curl -X POST "http://localhost:4100/todo-list" \
+#   -H "Content-Type: application/json" \
+#   -d '{
+#     "title": "Купить молоко",
+#     "description": "2 литра, ночью доставить"
+#   }'
 

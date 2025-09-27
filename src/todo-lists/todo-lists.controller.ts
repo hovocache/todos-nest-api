@@ -1,10 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { TodoListsService } from './todo-lists.service';
 import { CreateTodoListDto } from './dto/create-todo-list.dto';
 import { UpdateTodoListDto } from './dto/update-todo-list.dto';
 
 import type { AllDataRO } from 'src/shared/shared.types';
 import type { ToDo } from './todo-lists.types';
+
+import { PAGE_SIZE_VARIATIONS } from 'src/shared/shared.constants';
 
 @Controller('todo-list')
 export class TodoListsController {
@@ -16,12 +18,24 @@ export class TodoListsController {
   }
 
   @Get()
-  async findAll(): Promise<AllDataRO<ToDo>> {
-    return this.todoListsService.findAll();
+  async findAll(@Query('page') page: number, @Query('limit') limit: number): Promise<AllDataRO<ToDo>> {
+
+    if (!page) {
+      page = 1;
+    }
+
+    if (!limit) {
+      limit = PAGE_SIZE_VARIATIONS[20];
+    }
+
+    console.log('Page:', page, 'Limit:', limit);
+
+
+    return this.todoListsService.findAll(page, limit);
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id') id: string) { 
     return this.todoListsService.findOne(+id);
   }
 

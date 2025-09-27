@@ -23,17 +23,17 @@ export class TodoListsService {
     return createdTodo.save();
   }
 
-  async findAll(): Promise<AllDataRO<ToDo>> {
-     const skip = (tmpPage - 1) * tmpLimit;
+  async findAll(page: number, limit: number): Promise<AllDataRO<ToDo>> {
+     const skip = (page - 1) * limit;
 
-     const todos = await this.toDoModel.find().skip(skip).limit(tmpLimit).exec();
+     const todos = await this.toDoModel.find().skip(skip).limit(limit).exec();
 
      return {
        data: todos,
        meta: {
          total: await this.toDoModel.countDocuments().exec(),
-         page: tmpPage,
-         limit: tmpLimit,
+         page: page,
+         limit: limit,
        },
      };
   }
