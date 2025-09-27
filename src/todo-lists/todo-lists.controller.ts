@@ -24,12 +24,9 @@ export class TodoListsController {
       page = 1;
     }
 
-    if (!limit) {
+    if (!limit || !PAGE_SIZE_VARIATIONS[limit]) {
       limit = PAGE_SIZE_VARIATIONS[20];
     }
-
-    console.log('Page:', page, 'Limit:', limit);
-
 
     return this.todoListsService.findAll(page, limit);
   }
