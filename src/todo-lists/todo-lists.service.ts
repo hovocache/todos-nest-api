@@ -1,10 +1,13 @@
-import { Model } from 'mongoose';
+
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
+
 import { CreateTodoListDto } from './dto/create-todo-list.dto';
 import { UpdateTodoListDto } from './dto/update-todo-list.dto';
 
 import type { AllDataRO } from 'src/shared/shared.types';
+
 import { ToDo } from './todo-lists.schema';
 
 const tmpPage = 1;
