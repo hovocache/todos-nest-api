@@ -15,6 +15,9 @@ export class ToDo {
   @Prop()
   description?: string;
 
+  @Prop({required: true, default: 'TEST2'})
+  test2: string;
+
   @Prop({
     required: true,
     enum: Object.values(TODO_STATUS_TYPES),
@@ -22,10 +25,10 @@ export class ToDo {
   })
   status: string;
 
-@Prop({ type: Types.ObjectId, ref: 'User', required: true })
+@Prop({ type: Types.ObjectId, ref: 'User', default: null })
   initiator: Types.ObjectId;
 
-@Prop({ type: Types.ObjectId, ref: 'User' })
+@Prop({ type: Types.ObjectId, ref: 'User', default: null })
   performer: Types.ObjectId;
 
 @Prop({ type: [{ type: Types.ObjectId, ref: 'User' }] })

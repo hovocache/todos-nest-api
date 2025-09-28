@@ -4,10 +4,14 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 
-async function run() {
+
+
+export default async function toDoMigrateUp() {
   await mongoose.connect(`${process.env.MONGO_DB_URI}/${process.env.MONGO_DB_NAME}`);
 
-await mongoose.connection.collection('todos').updateMany(
+  const todosCollection = mongoose.connection.collection('todos') as any;
+
+await todosCollection.updateMany(
   {
     $or: [
       { status: { $exists: false } },
@@ -31,5 +35,4 @@ await mongoose.connection.collection('todos').updateMany(
   await mongoose.disconnect();
 }
 
-run();
-// To run this migration, use the command: node src/migrations/todos.ts
+

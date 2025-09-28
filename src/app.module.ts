@@ -7,15 +7,24 @@ import { AppService } from './app.service';
 import { TodoListsController } from './todo-lists/todo-lists.controller';
 import { TodoListsService } from './todo-lists/todo-lists.service';
 import { TodoListsModule } from './todo-lists/todo-lists.module';
+import { UserModule } from './user/user.module';
+
+import dotenv from 'dotenv'
+
+dotenv.config();
+
+console.log('MONGO_DB_URI IN MODULE', process.env.MONGO_DB_URI);
 
 @Module({
   imports: [
         ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: '.env'
     }),
         MongooseModule.forRoot(process.env.MONGO_DB_URI ||'mongodb://localhost:27017',
-          {dbName: process.env.MONGO_DB_NAME || 'todosDB'}),
+          {dbName: process.env.MONGO_DB_NAME}),
         TodoListsModule,
+        UserModule,
   ],
   controllers: [AppController, TodoListsController],
   providers: [AppService, TodoListsService],
