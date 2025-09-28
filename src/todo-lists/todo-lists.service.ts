@@ -10,9 +10,6 @@ import type { AllDataRO } from 'src/shared/shared.types';
 
 import { ToDo } from './todo-lists.schema';
 
-const tmpPage = 1;
-const tmpLimit = 20;
-
 
 @Injectable()
 export class TodoListsService {
@@ -32,33 +29,39 @@ export class TodoListsService {
        data: todos,
        meta: {
          total: await this.toDoModel.countDocuments().exec(),
-         page: page,
-         limit: limit,
+         page,
+         limit,
        },
      };
   }
 
   async findOne(id: number) {
     const todo = await this.toDoModel.findById(id).exec();
+
     if (!todo) {
       throw new NotFoundException(`Todo with ID ${id} not found`);
     }
+
     return todo;
   }
 
   async update(id: number, updateTodoListDto: UpdateTodoListDto) {
     const todo = await this.toDoModel.findByIdAndUpdate(id, updateTodoListDto, { new: true }).exec();
+
     if (!todo) {
       throw new NotFoundException(`Todo with ID ${id} not found`);
     }
+
     return todo;
   }
 
   async remove(id: number) {
     const todo = await this.toDoModel.findByIdAndDelete(id).exec();
+
     if (!todo) {
       throw new NotFoundException(`Todo with ID ${id} not found`);
     }
+    
     return todo;
   }
 }

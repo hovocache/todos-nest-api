@@ -11,7 +11,7 @@ import { ToDo, ToDoSSchema } from './todo-lists.schema';
   ],
   controllers: [TodoListsController],
   providers: [TodoListsService],
-  exports: [MongooseModule],
+  exports: [],
 })
 export class TodoListsModule {}
 
