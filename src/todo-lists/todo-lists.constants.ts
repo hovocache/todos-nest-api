@@ -1,10 +1,11 @@
 const TODO_STATUS_TYPES = {
     NEW: 'new',
-    PLANNED: 'planned',
+    BACKLOG: 'backlog',
+    IN_PROGRESS: 'inProgress',
     CANCELED: 'canceled',
     DONE: 'done',
     BLOCKED: 'blocked',
-    BACKLOG: 'backlog',
+    OVERDUE: 'overdue',
     ARCHIVED: 'archived',
 };
 export { TODO_STATUS_TYPES };

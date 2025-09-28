@@ -15,9 +15,6 @@ export class ToDo {
   @Prop()
   description?: string;
 
-  @Prop({required: true, default: 'TEST2'})
-  test2: string;
-
   @Prop({
     required: true,
     enum: Object.values(TODO_STATUS_TYPES),

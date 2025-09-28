@@ -8,19 +8,19 @@ import { UpdateTodoListDto } from './dto/update-todo-list.dto';
 
 import type { AllDataRO } from 'src/shared/shared.types';
 
-import { ToDo } from './todo-lists.schema';
+import { ToDo, ToDoDocument } from './todo-lists.schema';
 
 
 @Injectable()
 export class TodoListsService {
- constructor(@InjectModel(ToDo.name) private toDoModel: Model<ToDo>) {}
+ constructor(@InjectModel(ToDo.name) private toDoModel: Model<ToDoDocument>) {}
   
   create(createTodoListDto: CreateTodoListDto) {
     const createdTodo = new this.toDoModel(createTodoListDto);
     return createdTodo.save();
   }
 
-  async findAll(page: number, limit: number): Promise<AllDataRO<ToDo>> {
+  async findAll(page: number, limit: number): Promise<AllDataRO<ToDoDocument>> {
      const skip = (page - 1) * limit;
 
      const todos = await this.toDoModel.find().skip(skip).limit(limit).exec();
@@ -61,7 +61,7 @@ export class TodoListsService {
     if (!todo) {
       throw new NotFoundException(`Todo with ID ${id} not found`);
     }
-    
+
     return todo;
   }
 }

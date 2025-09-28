@@ -1,3 +1,5 @@
+import { Admin } from "typeorm";
+
 const PAGE_SIZE_VARIATIONS = {
     5: 5,
     10: 10,
@@ -8,10 +10,9 @@ const PAGE_SIZE_VARIATIONS = {
 }
 
 const USER_ROLES = {
-    SUPERADMIN: 'superAdmin',
-    ADMIN: 'admin',
-    MANAGER: 'manager',
-    EMPLOYEE: 'employee',
+  SUPERADMIN: 'superadmin',
+  ADMIN: 'admin',
+  USER: 'user',
 }
 
 export { PAGE_SIZE_VARIATIONS, USER_ROLES };
